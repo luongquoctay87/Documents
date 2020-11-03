@@ -1,0 +1,17 @@
+--- CHANGE ACCOUNT ---
+$ git config --global user.name "taylq"
+$ git config --global user.email "taylq@nal.vn"
+
+—-
+- git stash
+- git checkout branch develop
+- git pull
+- git checkout branch setting_mail_server
+- git stash pop
+
+——
+
+git restore --staged Guideline/*
+
+reset comitted not push to repository
+git reset HEAD~

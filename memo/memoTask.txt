@@ -1,0 +1,152 @@
+
+tay2020G3204
+Nalhn2020! / nal##1403
+
+Wifi: Nal-SpiralG /  spiralG##1403
+
+git checkout a Remote Branch
+
+Step 00: Configure your local repository
+	
+	1. Connect to the remote repository:
+	2. Configure git author & email
+	3. Checkout develop branch
+		$ git checkout develop  ---> create new remote branch
+
+Step 01: [This is the Root's tasks] Develop feature/display_board
+	$ vagrant up
+	$ vagrant ssh
+	$ cd /vagrant/workspace/day03
+	$ git merge origin/feature/display_board
+
+Step 02.1: Develop feature/seeding : Viet cac thuat toan trong file core.js	
+
+
+
+=====================
+admins-Mac-mini-2:learning-sandbox-v1.04 taylq$ lsof -i :4567
+COMMAND   PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+VBoxHeadl 585 taylq   20u  IPv4 0xbf1b494bb3835c45      0t0  TCP *:tram (LISTEN)
+admins-Mac-mini-2:learning-sandbox-v1.04 taylq$ kill -9 585
+admins-Mac-mini-2:learning-sandbox-v1.04 taylq$ vagrant up
+
+admins-Mac-mini-2:learning-sandbox-v1.04 taylq$ git remote -v
+fatal: not a git repository (or any of the parent directories): .git
+admins-Mac-mini-2:learning-sandbox-v1.04 taylq$ cd day03/
+admins-Mac-mini-2:day03 taylq$ git remote -v
+origin	http://localhost:10080/root/day03.git (fetch)
+origin	http://localhost:10080/root/day03.git (push)
+
+vagrant@docker-host:/vagrant/workspace/day03$ git config --global user.name taylq
+vagrant@docker-host:/vagrant/workspace/day03$ git config --global user.email taylq@nal.vn
+
+curl -X POST http://localhost:8080/authenticate -H 'Content-type: application/json' -d '{"username": "sysadmin", "password": "Admin@123"}'
+
+
+=============================================
+
+Just to summarise all the answers:
+
+Clean up the line: You can use Ctrl+U to clear up to the beginning.
+Clean up the line: Ctrl+E Ctrl+U to wipe the current line in the terminal
+Clean up the line: Ctrl+A Ctrl+K to wipe the current line in the terminal
+Cancel the current command/line: Ctrl+C.
+Recall the deleted command: Ctrl+Y (then Alt+Y)
+Go to beginning of the line: Ctrl+A
+Go to end of the line: Ctrl+E
+Remove the forward words for example, if you are middle of the command: Ctrl+K
+Remove characters on the left, until the beginning of the word: Ctrl+W
+To clear your entire command prompt: Ctrl + L
+Toggle between the start of line and current cursor position: Ctrl + XX
+
+Ctrl+a Move cursor to start of line
+Ctrl+e Move cursor to end of line
+Ctrl+b Move back one character
+Alt+b Move back one word
+Ctrl+f Move forward one character
+Alt+f Move forward one word
+Ctrl+d Delete current character
+Ctrl+w Cut the last word
+Ctrl+k Cut everything after the cursor
+Alt+d Cut word after the cursor
+Alt+w Cut word before the cursor
+Ctrl+y Paste the last deleted command
+Ctrl+_ Undo
+Ctrl+u Cut everything before the cursor
+Ctrl+xx Toggle between first and current positio
+nCtrl+l Clear the terminal
+Ctrl+c Cancel the command
+Ctrl+r Search command in history - type the search term
+Ctrl+j End the search at current history entry
+Ctrl+g Cancel the search and restore original line
+Ctrl+n Next command from the History
+Ctrl+p previous command from the History
+
+=============================================
+Project SpỉralG
+1. create ssh key and clone SpỉralG
+	- Follow to https://gitlab.nal.vn/help/ssh/README#generating-a-new-ssh-key-pair
+	- Add ssh key to https://gitlab.nal.vn/profile/keys
+
+2. Clone project (https): git clone https://gitlab.nal.vn/nal/projectg.git
+
+3. Git Fetch: $git fetch 
+
+4. Git checkout: $ git checkout upgrade-middleware-mail-services
+
+5.Build module on spiralG
+	- admins-Mac-mini-2:service taylq$ 
+	$ ./gradlew :mail-service:build | $ ./gradlew -p mail-service build
+
+
+# Revert changes to modified files.
+	$ git reset --hard
+
+# Remove all untracked files and directories.
+# '-f' is force, '-d' is remove directories.
+	$ git clean -fd
+
+#If you want to revert the changes only in current working directory, use
+	$ git checkout -- .
+
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+
+===================================================================================================
+
+http://watch-serieshd.tv/wp-content/themes/movies/work/rest/update_auto.php?category=anime&page=200
+
+http://manga-rock.net/wp-content/themes/manga/work/rest/read_manga.php?page=100
+
+===================================================================================================
+
+schedule-trigger-scheduler			2.1.9.RELEASE
+contents-service 					2.0.4.RELEASE
+kong-ratelimiting-metrics-cleaner	1.5.12.RELEASE
+site-service						2.0.4.RELEASE
+lib -> db							1.5.12.RELEASE
+lib -> email						1.4.2.RELEASE		*
+lib -> logs							1.4.2.RELEASE
+lib -> site							2.0.4.RELEASE
+lib -> template-engine				2.0.4.RELEASE
+
+
+Warning: 
+- Task :account-service:compileJava
+- > Task :lib:site:compileKotlin
+
+Move file on Mac
+mv example.txt ~/Documents
+
+
+
+UPDATE wp_postmeta SET meta_key = REPLACE(meta_key, 'vidnode.net', 'vidstreaming.io') WHERE 'meta_key' LIKE 'serverLink'
+
+
+
+
+
+
+
+
+FetchedAttachmentInfo

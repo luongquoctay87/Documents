@@ -1,0 +1,30 @@
+
+$ git checkout -b rel/0.2.3
+$ git pull
+$ git checkout -b rel/0.2.4
+$ git pull origin develop
+$ git commit -m "create a version: 0.2.4"
+$ git push
+$ git push --set-upstream origin rel/0.2.4
+
+$ git checkout develop-non-docker
+$ git pull origin rel/0.2.4
+$ git commit -m "create a version: 0.2.4"
+$ git push
+
+$ git checkout -b release/0.2.4
+$ git commit -m "create new version: 0.2.4"
+$ git push
+$ git push --set-upstream origin release/0.2.4
+
+---- Update README ----
+- deploy/README.md
+- deploy/setup/0.0.1/update.sh
+$ git add deploy/
+$ git commit -m "update vervsion: 0.2.4"
+$ git push 
+
+$ git checkout release/0.2.4
+$ git pull origin develop-non-docker
+$ git commit -m "update README version: 0.2.4"
+$ git push

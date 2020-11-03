@@ -1,0 +1,234 @@
+
+vunv 0334616603
+Sơn: 0965689295
+maivt: 0335716097
+tungls: 0938668818
+thuongln : 0942038998
+
+
+
+
+- Access Token: taylq / irk5SgFLXjQqc6zACBUs
+
+## Set up back-end
+	- Build project
+		$ cd projects/kwmc_backend/
+		$ docker-compose up -d --build
+	- Stop project
+		$ docker-compose down
+
+## Set up front-end
+	- install yarn/npm for Mac
+		$ brew install npm
+
+	- Intall library for project
+		$ cd /kwmc_frontend/ant_kwmc
+		$ npm install
+		$ npm start
+
+	- Access: http://localhost:8001/admin/users
+		Account: system / 1234567
+		TayLQ / OngTayVietNam
+
+## Auto Test ---------------------------------------------------------------------
+	- Run Back End Auto Test On Terminal
+	
+	$ cd /projects/kwmc_frontend/autotest/
+	$ npm start
+	$ yarn test:bdd-backend
+	$ yarn test:bdd-frontend
+
+## Synchronize Chrome Driver Between kwmc and PC browser
+	- Check chrome driver version
+	$ chromedriver -v
+
+	- modify package.json: “chromedriver": "^81.0.0", —> similar on PC
+
+	- Update Node-Module for kwmc
+	- $ cd /kwmc_frontend
+	- $ yarn install 
+	- $ cd /kwmc_frontend/bdd-frontend/
+	- $ yarn install
+
+
+For MacOS chromedriver upgrade
+$ brew cask upgrade chromedriver
+
+/Users/taylq/projects/kwmc_frontend/autotest/bdd-frontend/spec/cucumber/features/login/main.feature
+
+
+
+-------- DELETE EMAIL --------------------------------
+
+delete from email_attachments;
+delete from comments;
+delete from emails;
+ALTER SEQUENCE seq_email_attachments_id RESTART WITH 1;
+ALTER SEQUENCE seq_emails_id RESTART WITH 1;
+
+delete from individual_email_attachments;
+delete from individual_emails;
+ALTER SEQUENCE seq_individual_email_attachments_id RESTART WITH 1;
+ALTER SEQUENCE seq_individual_emails_id RESTART WITH 1;
+
+
+-----------------------------
+Mail：taylq@tnv.edu.vn
+Pass：OngTayVietNam
+
+Mail：kwmc-test@iijglobal.jp
+Pass：1Q9rT@7745Jx
+
+Mail: kwmc-test2@iijglobal.jp
+Pass: K7d@4KgPk9eQ
+
+Mail：kwmc-test3@iijglobal.jp
+Pass：4Q9rT@13561x
+
+Mail：kwmc-test-ss2@iijglobal.jp
+Pass：K9mP@4kQpJ7f
+
+Item Server Protocol
+POP server mail.securemx.jp
+POP3 (port number 110)
+POP over SSL / TLS (port number 995)
+【Caution】
+APOP is not available.
+
+IMAP server mail.securemx.jp
+IMAP (port number 143)
+IMAP over SSL / TLS (port number 993)
+
+
+kwmc-test3@iijglobal.jp		--> 44
+kwmc-test2@iijglobal.jp 	--> 1629
+kwmc-test-ss2@iijglobal.jp	--> 34816
+kwmc-test@iijglobal.jp 		--> 85191
+
+select count(*) from emails where mail_account_address='kwmc-test2@iijglobal.jp';
+
+
+https://docs.google.com/spreadsheets/d/1cb8N3zM_bToYvBowYtqxwwYpP8NHuvy07Y6i9fFxaiY/edit#gid=0
+
+
+SELECT post_title title, count(post_title) counts FROM wp_posts WHERE post_type='post' GROUP BY post_title HAVING count(post_title)>1
+
+
+
+ssh lafu@ssh-gw.nal.vn -p 2288
+
+ssh root@10.22.0.141 / lafu@2020
+
+
+
+ssh lafu@10.22.0.141  --> kwmc-release
+
+su - lafu
+
+cd kwmc-backend-source
+taylq / VW_sR8VkYicrEqp1_LEq
+
+uninstall : ./uninstall.sh
+
+
+sudo su - postgres -c "psql"
+\c kwmc;
+
+-----------------------------
+
+$ ssh maivt@35.240.144.166 --> kwmc
+
+$ su - lafu
+
+$ sudo su - postgres
+$ psql \c kwmc;
+
+
+
+------ Xem Status --------------
+systemctl status "kwmc*"
+
+systemctl status kafka
+
+
+su - kafka
+systemctl status kafka
+
+
+
+
+
+muốn xem log của module nào anh dùng lệnh xem log của module ấy:
+tail -f -n +1 /var/log/kwmc/job-scheduler/kwmc-job-scheduler.log
+tail -f -n +1 /var/log/kwmc/api-service/kwmc-api-service.log
+tail -f -n +1 /var/log/kwmc/ind-mail-fetcher/kwmc-ind-mail-fetcher.log
+tail -f -n +1 /var/log/kwmc/pre-processor/kwmc-pre-processor.log
+tail -f -n +1 /var/log/kwmc/mail-fetcher/kwmc-mail-fetcher.log
+tail -f -n +1 /var/log/kwmc/mail-sender/kwmc-mail-sender.log
+
+[lafu@lafu-kwmc ~]$ ps aux | grep kwmc
+
+
+
+--- Reset Email: remove-email-sql]$ sh remove-email.sh
+
+
+
+sudo systemctl daemon-reload
+sudo systemctl enable kwmc-api-service
+sudo systemctl start kwmc-api-service
+
+sudo systemctl enable kwmc-job-scheduler
+sudo systemctl start kwmc-job-scheduler
+sudo systemctl restart kwmc-job-scheduler
+sudo systemctl stop kwmc-job-scheduler
+
+sudo systemctl enable kwmc-mail-fetcher
+sudo systemctl start kwmc-mail-fetcher
+sudo systemctl stop kwmc-mail-fetcher
+sudo systemctl restart kwmc-mail-fetcher
+
+sudo systemctl enable kwmc-pre-processor
+sudo systemctl start kwmc-pre-processor
+
+sudo systemctl enable kwmc-mail-sender
+sudo systemctl start kwmc-mail-sender
+
+sudo systemctl enable kwmc-ind-mail-fetcher
+sudo systemctl start kwmc-ind-mail-fetcher
+
+sudo systemctl reload nginx
+
+
+
+----- UPDATE SQL COMMENTS ----
+
+deploy/dev/setup_db.sh
+deploy/setup/0.0.1/update.sh
+deploy/setup/scripts/init-db.sh
+deploy/migrations/0.0.2/20200824_table_mail_accountst_drop_column_is_fetching/
+deploy/setup/0.0.1/migrations/20200824_table_mail_accountst_drop_column_is_fetching.sql
+
+--------------------------------------
+
+cat /dev/null > /home/kafka/kafka/logs/kafka.log &&
+cat /dev/null > /var/log/kwmc/ind-mail-fetcher/kwmc-ind-mail-fetcher.log &&
+cat /dev/null > /var/log/kwmc/job-scheduler/kwmc-job-scheduler.log &&
+cat /dev/null > /var/log/kwmc/mail-fetcher/kwmc-mail-fetcher.log &&
+cat /dev/null > /var/log/kwmc/mail-sender/kwmc-mail-sender.log &&
+cat /dev/null > /var/log/kwmc/pre-processor/kwmc-pre-processor.log &&
+cat /dev/null > /var/log/kwmc/api-service/kwmc-api-service.log
+
+
+// Dành cho những thằng lười (Không cho người chăm chỉ làm đúng quy trình nhé)
+$ ./gradlew clean build -p fetch-email
+$ mv -i kwmc-mail-fetcher.jar kwmc-mail-fetcher.jar.bk
+$ cp kwmc_source_code/kwmc_backend/fetch-email/build/libs/fetch-email-0.0.1-SNAPSHOT.jar kwmc_app/core/kwmc-mail-fetcher.jar
+
+cp var/log/kwmc/kwmc-mail-fetcher.log  var/log/kwmc/kwmc-mail-fetcher.txt
+
+
+
+nal##1403 --> Metting
+
+vim fetch-email/src/main/java/com/iij/fetchemail/event/MailListPOP3DistributionListener.java

@@ -1,0 +1,45 @@
+## Xoá toàn bộ data của hệ thống
+
+docker-compose down -v
+rm -r volumes/postgresql/data
+
+## Lấy lại dữ liệu Backup
+
+cp -r volumes/postgresql/data-original volumes/postgresql/data
+docker-compose stop postgresql
+docker-compose rm postgresql
+
+## Backup dữ liệu postgresql
+
+cp -r volumes/postgresql/data volumes/postgresql/data-original
+
+## Kiểm tra log của container
+
+docker-compose logs -f spiral-service
+
+## Inspect kafka
+
+docker-compose exec kafka sh
+
+cd opt/kafka
+
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic synchronize.account --from-beginning
+
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group spiral-service
+
+
+_________________________________________________
+Build All Project: ./gradlew build
+
+Build One Project: ./gradlew build api-service
+
+Xoa tat ca image ko su dung 
+
+docker rmi $(docker images -q)
+
+Xoa tat ca
+docker rmi $(docker images -q) -f
+
+

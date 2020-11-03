@@ -1,0 +1,25 @@
+== Dang nhap client server ==
+ssh lafu@ssh-gw.nal.vn -p 2288
+
+ssh root@10.22.0.141
+
+lafu@2020
+
+tail -f -n +1 /var/log/kwmc/job-scheduler/kwmc-job-scheduler.log
+tail -f -n +1 /var/log/kwmc/api-service/kwmc-api-service.log
+tail -f -n +1 /var/log/kwmc/ind-mail-fetcher/kwmc-ind-mail-fetcher.log
+tail -f -n +1 /var/log/kwmc/pre-processor/kwmc-pre-processor.log
+tail -f -n +1 /var/log/kwmc/mail-fetcher/kwmc-mail-fetcher.log
+tail -f -n +1 /var/log/kwmc/mail-sender/kwmc-mail-sender.log
+
+== Xem source code ==
+su - lafu
+
+
+== Xem log kafka
+su - kakka
+tail -f -n+1 /home/kafka/kafka/logs/kafka.log
+
+systemctl status kafka
+sudo systemctl enable kafka
+systemctl restart kafka

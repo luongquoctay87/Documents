@@ -1,0 +1,51 @@
+Last login: Mon Sep 21 17:58:48 on ttys001
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+TayLQ:~ taylq$ cat ~/.ssh/id_rsa.pub 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/zYmhwsT2hry8Z4eyRRo6bKDdsItv2r4IxQTjh6czUjrLZPHRMLAJEYXV6iu5koLlT8GsRMIt3Zhxwsexa9ZJr2PZTTLUBt7scty2btNtNfprDBqdPxwHBTUOGY+cSjpfZMdH5kQMHvCtSfj31LvXzYcyEHl2iCUZH123r7y0p1+YXnN63AaL1H+HERGHoNIdrbFz2j1OHxS9Xi55zbf4oixFd4w3EJCdpZ9DAlkv2lNVqjQP+10sFPZReHFrUpZ/f5YAMZS6amIbTZ+QaUOwu5DE+3I3SbU38zmt+0CaMfm6v9RuuwxnG4W4s6E3xQ0QqJ8Bs2PUBUFOKWepg6/UzNZkMHzNmnueMCJPTmHuYkgOGpf1yjyAqwWMA9/uVd2odGcTOYwbxiGEdgRDNBXorDgi1IQlhzJiKSm08TL7OmTpTqxgIRVSTgpYDBFDNlDh7jS5jw1VyKEHbFB/WHLDN3qHFQWmNywKSOuTBeHQ8myqjroNFQlouM0ShsuM1ts= taylq@TayLQ.local
+TayLQ:~ taylq$ vim ~/.ssh/
+config                                   id_rsa.pub                               known_hosts.bk                           record-exporter-0.0.1-SNAPSHOT.jar
+id_rsa                                   known_hosts                              log-service-register-0.0.1-SNAPSHOT.jar  ssh_tunnel.pem
+TayLQ:~ taylq$ vim ~/.ssh/config 
+TayLQ:~ taylq$ sudo vim ~/.ssh/known_hosts
+Password:
+TayLQ:~ taylq$ cat ~/.ssh/config 
+Host 9anime
+ HostName 77.73.70.246
+ User root
+ Port 22
+ IdentityFile ~/.ssh/id_rsa
+ ServerAliveInterval 60
+TayLQ:~ taylq$ ssh 9anime
+The authenticity of host '77.73.70.246 (77.73.70.246)' can't be established.
+RSA key fingerprint is SHA256:RAEZBJWhDd1RVjyj8SDy+5t39hNVbuXr3TWOhy+0HtQ.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added '77.73.70.246' (RSA) to the list of known hosts.
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-142-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Kubernetes 1.19 is out! Get it in one command with:
+
+     sudo snap install microk8s --channel=1.19 --classic
+
+   https://microk8s.io/ has docs and details.
+root@9anime:~# exit
+logout
+Connection to 77.73.70.246 closed.
+TayLQ:~ taylq$ scp 9anime:/home/anime/anime_db_20200921.sql.tgz ~/Desktop/
+anime_db_20200921.sql.tgz                                                                                                                          100%   14MB   1.3MB/s   00:10    
+TayLQ:~ taylq$ 
+
+
+
+
+
+
+
+
