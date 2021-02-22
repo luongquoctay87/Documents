@@ -1,11 +1,13 @@
 SpiralG
-アカウント情報:
-ログイン: luong.quoc.tay
-パスワード: Hoilamj1
 ログイン: https://melalu.office-devel/redmine/login
 ID: vietnamdev
 PASS: 1192stibdepip
 Proxy SwitchyOmega
+
+アカウント情報:
+ログイン: luong.quoc.tay
+パスワード: Hoilamj1
+
 
 function FindProxyForURL(url, host) {
      if ( shExpMatch(url, "*office-devel*") || shExpMatch(url, "*office-dev*") || shExpMatch(url, "*inaba.placedev*")
@@ -44,3 +46,33 @@ sudo pip install --upgrade pip
 ======================================================================
 
 1. service/service-healthcheck/HealthCheck.postman_collection.json
+
+--> api-gateway/script/setup.py
+
+
+--- Reset Database
+      $ docker stop service_postgresql_1
+      $ docker rm service_postgresql_1
+      $ rm -rf volumes/postgresql/data
+      $ docker-compose up -d postgresql
+      $ ./scripts/setup.sh
+      $ docker-compose up -d 
+
+      $ (cd api-gateway/script && python setup.py)
+
+----------------------------------------
+1. Create App Manage Groups
+      http://{{HOST}}/v1/apps/{{APP_ID}}/manageGroups
+            -> /user/apps/{appId:\d+}/groups
+
+zip file:
+      $ tar cvzf volumes/postgresql/data-20201127.tar.gz volumes/postgresql/data
+unzip file:
+      $ tar -xf archive.tar.gz
+
+-----------------------------------------
+Login Staging Server
+path: ssh spiralg@10.22.20.32
+password: spiralg
+
+10.22.21.134 teamg/123456

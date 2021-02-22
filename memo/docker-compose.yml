@@ -1,0 +1,506 @@
+version: "2.3"
+
+services:
+    postgresql:
+        image: postgres:9.6
+        environment:
+            POSTGRES_USER: pipe
+            POSTGRES_HOST_AUTH_METHOD: trust
+            TZ: Asia/Tokyo
+        ports:
+            - 5432:5432
+        volumes:
+            - ./volumes/postgresql/data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U pipe"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
+        mem_limit: 500m
+
+#    log-database:
+#        image: log-database:latest
+#        build:
+#            context: ./log-database
+#        volumes:
+#            - ./volumes/log-database/data/db:/data/db
+#        mem_limit: 250m
+
+    zookeeper:
+        image: zookeeper:3.4.9
+        ports:
+            - 2181:2181
+        healthcheck:
+            test: ["CMD-SHELL", "echo ruok | nc localhost 2181 | grep imok"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
+        mem_limit: 250m
+
+    kafka:
+        image: wurstmeister/kafka:2.12-2.2.1
+        environment:
+            KAFKA_BROKER_ID: 1
+            KAFKA_LISTENERS: PLAINTEXT://:9092
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181/kafka
+            KAFKA_DELETE_TOPIC_ENABLE: "true"
+        volumes:
+            - kafka-data:/kafka
+        depends_on:
+            zookeeper:
+                condition: service_healthy
+        mem_limit: 1000m
+
+    activemq:
+        image: activemq:5.15.9
+        build:
+            context: ./activemq
+            args:
+                - http_proxy
+                - https_proxy
+        depends_on:
+            zookeeper:
+                condition: service_healthy
+        ports:
+            - 8161:8161
+        mem_limit: 500m
+
+    api-gateway-redis:
+        image: redis:3.2-alpine
+        mem_limit: 250m
+
+    redis:
+        image: redis:3.0.6-alpine
+        mem_limit: 250m
+
+    cache-redis:
+        image: cache-redis
+        build:
+            context: ./cache-redis
+
+    redis-sentinel:
+        build:
+          context: ./redis-sentinel
+        depends_on:
+          - redis
+
+#    postfix:
+#        image: postfix:latest
+#        ports:
+#            - "2525:25"
+#        build:
+#            context: ./postfix
+#            args:
+#                - http_proxy
+#                - https_proxy
+#        hostname: mail.local.rcv.spiral-platform.net
+#        environment:
+#            MYDOMAIN: &return_path local.rcv.spiral-platform.net
+#            OUTBOUND_MTA_HOST: &outbound_mta_host 192.168.1.1
+#            QUEUE_LIFETIME: 5m
+#        mem_limit: 250m
+
+    api-gateway:
+        image: api-gateway
+        build:
+            context: ./api-gateway
+            args:
+                - http_proxy
+                - https_proxy
+        ports:
+            - 8000:8000
+            - 8001:8001
+        environment:
+            KONG_TRUSTED_IPS: 0.0.0.0/0
+            KONG_ADMIN_LISTEN: "0.0.0.0:8001, 127.0.0.1:8444 ssl"
+            KONG_REDIS_MASTER_NAME: ctr-bff
+            KONG_REDIS_SENTINEL_NODES: redis-sentinel:26379
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            spiral-service:
+              condition: service_started
+            file-service:
+              condition: service_started
+        mem_limit: 250m
+
+    account-service:
+        image: account-service
+        build:
+            context: ./account-service
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql/account
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181/kafka
+            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+            SPRING_DATA_MONGODB_URI: mongodb://log-database:27017/applog
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            zookeeper:
+                condition: service_healthy
+            kafka:
+                condition: service_started
+        mem_limit: 500m
+
+    spiral-service:
+        image: spiral-service
+        build:
+            context: ./spiral-service
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql/spiral
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181/kafka
+            AMAZONAWS_S3_URL: http://rados-gateway:8080
+            ZOOKEEPER_ZKNODES: zookeeper:2181/kafka
+            KAFKA_BROKERS: kafka:9092
+            KAFKA_NODE: 1
+            ACTIVEMQ_BROKER_URL: failover:(tcp://activemq:61616)
+            PERIODIC_RECEIVE_DLQ_CRON: "0 0 * * * *"
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            kafka:
+                condition: service_started
+        mem_limit: 500m
+
+    db-node-service:
+        image: db-node-service
+        build:
+            context: ./db-node-service
+        environment:
+            NODE_URL: 1:jdbc:postgresql://postgresql/node
+            ACCNODE_URL: jdbc:postgresql://postgresql/account_node
+            SPRING_DATASOURCE_USERNAME: pipe
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181/kafka
+            JMS_PRODUCER_DESTINATION_INSERT: fileScanRequests
+            JMS_PRODUCER_DESTINATION_DELETE: node1.batchWriteRequests
+            JMS_PRODUCER_REPRYTO_INSERT: node1.batchInsertRequests
+            JMS_PRODUCER_ARRIVAL_DELAY: 2
+            SCS_PRODUCER_DESTINATION: node1.batchWriteScheduleRequests
+            SCS_CONSUMER_DESTINATION: node1.batchWriteScheduleRequests
+            SCS_CONSUMER_GROUP: node1.batchWriteScheduleRequests
+            SCS_CONSUMER_DLQ: node1.batchWriteScheduleRequests.dlq
+            PERIODIC_PUBLISH_CRON: "0 0 0 * * *"
+            PERIODIC_DELETION_CRON: "0 0 0 * * *"
+            PERIODIC_DELETION_OFFSET: -14 days
+            PERIODIC_RECEIVE_DLQ_CRON: "0 0 * * * *"
+            SPIRAL_DOWNLOAD_API_HOSTNAME: localhost
+            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+            KAFKA_SECURITY_PROTOCOL: PLAINTEXT
+            KAFKA_SASL_MECHANISM: GSSAPI
+            KAFKA_JAAS_LOGINMODULE: #{null}
+            KAFKA_SASL_JAAS_CONFIG: #{null}
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            kafka:
+                condition: service_started
+        mem_limit: 500m
+
+#    express-scheduler:
+#        image: express-scheduler:latest
+#        build:
+#            context: ./express-scheduler
+#        environment:
+#            SPRING_ACTIVEMQ_BROKER_URL: failover:(tcp://activemq:61616)
+#        depends_on:
+#            postgresql:
+#                condition: service_healthy
+#            activemq:
+#                condition: service_started
+#        mem_limit: 500m
+
+#    log-service:
+#        image: log-service:latest
+#        build:
+#            context: ./log-service
+#        environment:
+#            SPRING_DATA_MONGODB_URI: mongodb://log-database:27017/applog
+#            SPIRAL_EMAILLOG_DOWNLOAD_HOSTNAME: localhost
+#        depends_on:
+#            log-database:
+#                condition: service_started
+#            postgresql:
+#              condition: service_healthy
+#            kafka:
+#                condition: service_started
+#        mem_limit: 500m
+#
+#    log-service-register:
+#        image: log-service-register:latest
+#        build:
+#            context: ./log-service-register
+#        environment:
+#            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+#            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181/kafka
+#            SPRING_DATA_MONGODB_URI: mongodb://log-database:27017/applog
+#            PERIODIC_RECEIVE_DLQ_CRON: "0 0 * * * *"
+#        depends_on:
+#            kafka:
+#                condition: service_started
+#            log-database:
+#                condition: service_started
+#        mem_limit: 500m
+
+#    bounce-parser: # bounce-parser + email-error-pickuper. production環境ではVM.
+#        image: bounce-parser:latest
+#        build:
+#            context: ./bounce-parser
+#            args:
+#                - http_proxy
+#                - https_proxy
+#        environment:
+#            MYDOMAIN: *return_path
+#            EMAIL_ERROR_KAFKA_HOST: kafka:9092
+#        depends_on:
+#            kafka:
+#                condition: service_started
+#        mem_limit: 500m
+
+#    mail-service:
+#        image: mail-service:latest
+#        build:
+#            context: ./mail-service
+#        environment:
+#            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+#            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181/kafka
+#            SPRING_ACTIVEMQ_BROKER_URL: failover:(tcp://activemq:61616)
+#        depends_on:
+#            activemq:
+#                condition: service_started
+#        mem_limit: 500m
+
+#    email-error-reflector:
+#        image: email-error-reflector
+#        build:
+#            context: ./email-error-reflector
+#        environment:
+#            EMAIL_ERROR_KAFKA: kafka:9092
+#            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+#            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+#            PERIODIC_RECEIVE_DLQ_CRON: "0 0 * * * *"
+#        depends_on:
+#            redis-sentinel:
+#                condition: service_started
+#            kafka:
+#                condition: service_started
+#        mem_limit: 500m
+
+#    dns-service:
+#        image: dns-service:latest
+#        build:
+#            context: ./dns-service
+#        environment:
+#            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+#            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+#            DNS_SERVICE_SPIRAL_SELECTOR_DOMAIN: dkim-dev.spiral-platform.net
+#            DNS_SERVICE_SMTP_HOST: *outbound_mta_host
+#        depends_on:
+#            postgresql:
+#                condition: service_healthy
+#            redis-sentinel:
+#                condition: service_started
+#        mem_limit: 500m
+
+#    mail-controller:
+#        image: mail-controller
+#        build:
+#            context: ./mail-controller
+#        environment:
+#            MC_HOSTNAME: spiral-platform.com
+#            MC_RETURN_PATH: *return_path
+#            MC_DIVISION_NUMBER: 1
+#            MC_DIVIDING_THRESHOLD: 100
+#            SPIRAL_MC_QUEUE_CONCURRENCY: 1-2
+#            ZOOKEEPER_ZKNODES: zookeeper:2181/kafka
+#            KAFKA_BROKERS: kafka:9092
+#            ACTIVEMQ_BROKER_URL: failover:(tcp://activemq:61616)
+#            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+#            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+#        depends_on:
+#            postgresql:
+#                condition: service_healthy
+#            zookeeper:
+#                condition: service_healthy
+#            activemq:
+#                condition: service_started
+#            kafka:
+#                condition: service_started
+#        mem_limit: 500m
+#
+#    mail-agent:
+#        image: mail-agent:latest
+#        build:
+#            context: ./mail-agent
+#        environment:
+#            MAIL_AGENT_ID: 1
+#            POSTFIX_HOSTNAME: postfix
+#            POSTFIX_PORT: 25
+#            ZOOKEEPER_ZKNODES: zookeeper:2181/kafka
+#            KAFKA_BROKERS: kafka:9092
+#            ACTIVEMQ_BROKER_URL: failover:(tcp://activemq:61616)
+#        depends_on:
+#            postgresql:
+#                condition: service_started
+#            zookeeper:
+#                condition: service_started
+#            activemq:
+#                condition: service_started
+#            kafka:
+#                condition: service_started
+#            log-database:
+#                condition: service_started
+#        healthcheck:
+#            test: ["CMD-SHELL", "curl localhost:8080/manage/health | grep UP"]
+#            interval: 10m
+#            timeout: 30s
+#            retries: 3
+#        mem_limit: 500m
+
+    db-node-batch-service:
+        image: db-node-batch-service
+        build:
+            context: ./db-node-batch-service
+        environment:
+            NODE_URL: 1:jdbc:postgresql://postgresql/node
+            ACCNODE_URL: jdbc:postgresql://postgresql/account_node
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181/kafka
+            SPRING_DATA_MONGODB_URI: mongodb://log-database:27017/applog
+            SPRING_ACTIVEMQ_BROKERURL: failover:(tcp://activemq:61616)
+            SPRING_ACTIVEMQ_USER: admin
+            SPRING_ACTIVEMQ_PASSWORD: admin
+            JMS_CONSUMER_DESTINATION_INSERT: node1.batchInsertRequests
+            JMS_CONSUMER_DESTINATION_DELETE: node1.batchWriteRequests
+            JMS_CONSUMER_DLQ: node1.batchWriteRequests.dlq
+            SCS_PRODUCER_DESTINATION: node1.batchWriteScheduleRequests
+            AMAZONAWS_S3_URL: http://rados-gateway:8080
+            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            zookeeper:
+                condition: service_healthy
+            kafka:
+                condition: service_started
+            activemq:
+                condition: service_started
+        mem_limit: 1000m
+
+    file-service:
+        image: file-service
+        build:
+            context: ./file-service
+        environment:
+            SPRING_ACTIVEMQ_BROKERURL: failover:(tcp://activemq:61616)
+            SPRING_ACTIVEMQ_USER: admin
+            SPRING_ACTIVEMQ_PASSWORD: admin
+            JMS_CONSUMER_DESTINATION: fileScanRequests
+            AMAZONAWS_S3_URL: http://rados-gateway:8080
+            CLAMAV_HOST: clamav
+            CLAMAV_PORT: 3310
+            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+            SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper:2181
+            CEPH_S3_NUM_OF_DAYS_ABORT_INCOMPLETED_MULTIPART_UPLOAD: 1
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            activemq:
+                condition: service_started
+        mem_limit: 500m
+
+#    site-service:
+#        image: projectg/site-service
+#        build:
+#            context: ./site-service
+#        environment:
+#            SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql/cms
+#            SPRING_ACTIVEMQ_BROKER_URL: tcp://activemq:61616
+#        depends_on:
+#            - postgresql
+
+#    click-count-service:
+#        image: projectg/click-count-service
+#        build:
+#            context: ./click-count-service
+#        ports:
+#            - 8090:8080
+#        environment:
+#            CLICK_COUNT_SUB_DOMAIN: cc
+#            CLICK_COUNT_DOMAIN: localhost
+#        depends_on:
+#            postgresql:
+#                condition: service_healthy
+#            kafka:
+#                condition: service_started
+#
+#    contents-service:
+#        image: projectg/contents-service
+#        build:
+#            context: ./contents-service
+#        ports:
+#           - 8080:8080
+#           - 8085:8085
+#        environment:
+#            SPIRALG_CACHE_ENABLED: "true"
+#            SPIRALG_CACHE_EXPIRED: 10m
+#            SPIRALG_CACHE_REDIS_DATABASE: 0
+#            SPIRALG_CACHE_REDIS_HOST: cache-redis
+#            SPIRALG_CACHE_REDIS_PORT: 6379
+#            SPIRALG_WEB_CORS_ALLOWDOMAIN: localhost:5000
+#            SPIRALG_WEB_EXTERNALCLIENT_PROXYENABLED: "true"
+#            SPIRALG_WEB_EXTERNALCLIENT_PROXYHOST: 192.168.254.203
+#            SPIRALG_WEB_EXTERNALCLIENT_PROXYPORT: 3129
+#            SPIRALG_WEB_INTERNALCLIENT_KEY: contents_service_keyauths_key
+#            SPIRALG_WEB_INTERNALCLIENT_ROOTURI: http://api-gateway:8000/sys/v1
+#            SPIRALG_WEB_SITECLIENT_ROOTURI: http://site-service:8080/sys
+#            SPIRALG_WEB_SSLENABLED: "false"
+#            SPIRALG_WEB_SYSTEMAPI_PORT: 8085
+#            SPRING_ACTIVEMQ_BROKER_URL: tcp://activemq:61616
+#            SPRING_MAIN_LAZY_INITIALIZATION: "false"
+#            SPRING_REDIS_DATABASE: 1
+#            SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+#            SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+#        depends_on:
+#            #    - postgresql
+#            kafka:
+#                condition: service_started
+#
+#    log-database:
+#        image: log-database:latest
+#        build:
+#            context: ./log-database
+#        ports:
+#          - 27017:27017
+
+#    schedule-trigger-scheduler:
+#      image: schedule-trigger-scheduler:latest
+#      build:
+#        context: ./schedule-trigger-scheduler
+#      environment:
+#        SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql/spiral
+#        SPRING_ACTIVEMQ_BROKER_URL: failover:(tcp://activemq:61616)
+#        SPRING_REDIS_SENTINEL_MASTER: ctr-bff
+#        SPRING_REDIS_SENTINEL_NODES: redis-sentinel:26379
+#      depends_on:
+#        postgresql:
+#          condition: service_healthy
+#        activemq:
+#          condition: service_started
+#      mem_limit: 500m
+
+networks:
+    default:
+        external:
+            name: test
+
+volumes:
+    kafka-data:

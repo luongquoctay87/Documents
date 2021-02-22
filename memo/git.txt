@@ -15,3 +15,5 @@ git restore --staged Guideline/*
 
 reset comitted not push to repository
 git reset HEAD~
+
+

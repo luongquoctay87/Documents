@@ -1,0 +1,12 @@
+1. Tạo User: User_01
+2. Tạo DB: DB_NODE_01
+3. Tạo Account: ACCOUNT_01
+4. Login
+5. Tạo App: App_01
+6. Tạo Role: Role_01
+
+
+@thuongln Anh test middleware theo link sau nhé http://10.22.20.32:5000/
+testuser1@example.com / Abc@1234
+Trước khi test anh thêm dòng sau vào /etc/hosts để có thể sử dụng account subdomain
+10.22.20.32 accounttest1.10.22.20.32
