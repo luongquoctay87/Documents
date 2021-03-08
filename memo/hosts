@@ -1,0 +1,44 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+127.0.0.1     admin.buzzil.tt
+127.0.0.1     public.buzzil.tt
+127.0.0.1     static.buzzil.tt
+127.0.0.1     cs.buzzil.tt
+127.0.0.1     if.buzzil.tt
+127.0.0.1     mg.buzzil.tt
+127.0.0.1     ow.buzzil.tt
+127.0.0.1     www.buzzil.tt
+127.0.0.1     buzzil.tt
+127.94.0.1	client.openvpn.net
+# END section for OpenVPN Client SSL sites
+# Added by Docker Desktop
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
+# 127.0.0.1 example.com
+
+#172.16.200.13 melalu.office-devel
+# spiral setting
+10.22.20.32 accounttest1.10.22.20.32
+
+
+# Open spiralg run UI
+127.0.0.1	account-test.localhost
+127.0.0.1 	accounttest.localhost
+127.0.0.1 	accounttest1.localhost
+127.0.0.1 	testaccount100.localhost
+
+
+# setting for run ui on google chrome
+#127.0.0.1	spiral-platform.local
+#127.0.0.1	accounttest1.spiral-platform.local
+# BEGIN section for OpenVPN Client SSL sites
+127.94.0.1	client.openvpn.net
+# END section for OpenVPN Client SSL sites

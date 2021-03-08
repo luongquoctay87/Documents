@@ -26,3 +26,13 @@
     - [characters] - Any character that is a member of the set characters
     - [!characters] - Any character that is not a member of the set characters
     - [[:class:]] - Any character that is a member of the specified class
+
+*cp option*
+```
+$ -a, --archive
+$ -i, --interactive
+$ -r, --recursive
+$ -u, --update
+$ -v, --verbose
+```
+

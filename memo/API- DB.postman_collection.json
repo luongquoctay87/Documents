@@ -1,0 +1,1394 @@
+{
+	"info": {
+		"_postman_id": "0094d539-44b1-4dd3-bf17-817ac73f00af",
+		"name": "API: DB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET: dbs",
+			"item": [
+				{
+					"name": "V1.0 - Get Dbs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "X-Spiral-App-Role",
+								"type": "text",
+								"value": "{{APP_ROLE_NAME}}"
+							},
+							{
+								"key": "X-Spiral-App-Authority",
+								"type": "text",
+								"value": "{{APP_AUTHORITY_NAME}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/v1/dbs/?apps={{APP_ID}}",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"dbs",
+								""
+							],
+							"query": [
+								{
+									"key": "apps",
+									"value": "{{APP_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V1.1 - Get Dbs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "X-Spiral-App-Role",
+								"type": "text",
+								"value": "{{APP_ROLE_NAME}}"
+							},
+							{
+								"key": "X-Spiral-App-Authority",
+								"type": "text",
+								"value": "{{APP_AUTHORITY_NAME}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/dbs",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"apps",
+								"{{APP_ID}}",
+								"dbs"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET: db",
+			"item": [
+				{
+					"name": "V1.0 - Get Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "X-Spiral-App-Role",
+								"type": "text",
+								"value": "{{APP_ROLE_NAME}}"
+							},
+							{
+								"key": "X-Spiral-App-Authority",
+								"type": "text",
+								"value": "{{APP_AUTHORITY_NAME}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/v1/dbs/@app_test.V10_Test_DB_01_BackUp",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"dbs",
+								"@app_test.V10_Test_DB_01_BackUp"
+							]
+						},
+						"description": "http://{{HOST}}/v1/dbs/1"
+					},
+					"response": []
+				},
+				{
+					"name": "V1.1 - Get Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "X-Spiral-App-Role",
+								"type": "text",
+								"value": "{{APP_ROLE_NAME}}"
+							},
+							{
+								"key": "X-Spiral-App-Authority",
+								"type": "text",
+								"value": "{{APP_AUTHORITY_NAME}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/v1/apps/1/dbs/1",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"apps",
+								"1",
+								"dbs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST: db",
+			"item": [
+				{
+					"name": "V1.0 - Create Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful create customer db\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"TEST_DB_ID\", jsonData[\"id\"]);",
+									"    for (var index in jsonData[\"fields\"]) {",
+									"        var fieldId = jsonData.fields[index][\"id\"];",
+									"        var fieldName = jsonData.fields[index][\"name\"];",
+									"        var fieldEnv = \"FIELD_\" + fieldName.toUpperCase() + \"_ID\";",
+									"        postman.setEnvironmentVariable(fieldEnv, fieldId);",
+									"    }",
+									"    postman.setNextRequest('Insert Customer Records');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"app\": \"{{APP_ID}}\",\n  \"name\": \"V10_Test_DB_01\",\n  \"displayName\": \"V10_Test_DB_01\",\n  \"description\": \"V10_Test_DB_01 is created by API v1.0\",\n  \"fields\": [\n    {\n      \"name\": \"id\",\n      \"displayName\": \"customer id\",\n      \"type\": \"text\",\n      \"required\": \"true\",\n      \"unique\": \"true\"\n    },\n      {\n      \"name\": \"name\",\n      \"displayName\": \"Customer name\",\n      \"type\": \"text\",\n      \"required\": \"true\"\n    },{\n      \"name\": \"avatar\",\n      \"displayName\": \"Customer avatar\",\n      \"type\": \"file\",\n      \"allowFileExtensions\": [\"jpg\", \"jpeg\", \"png\"],\n      \"required\": \"false\"\n    },{\n      \"name\": \"bla_text\",\n      \"displayName\": \"test bla text\",\n      \"type\": \"text\",\n      \"required\": \"true\"\n    },\n      {\n      \"name\": \"email\",\n      \"displayName\": \"Customer email\",\n      \"type\": \"email\",\n      \"required\": \"true\"\n    },\n      {\n      \"name\": \"phone\",\n      \"displayName\": \"Customer phone\",\n      \"type\": \"phone\",\n      \"required\": \"false\"\n    },\n      {\n      \"name\": \"workEmail\",\n      \"displayName\": \"Work email\",\n      \"type\": \"email\",\n      \"required\": \"false\"\n    }, {\n      \"name\": \"birth_day\",\n      \"displayName\": \"birthday\",\n      \"type\": \"date\"\n    }, {\n      \"name\": \"last_access\",\n      \"displayName\": \"last_access\",\n      \"type\": \"dateTime\"\n    }, {\n      \"name\": \"most_active_month\",\n      \"displayName\": \"most_active_month\",\n      \"type\": \"monthDay\"\n    }, {\n      \"name\": \"most_active_time\",\n      \"displayName\": \"most_active_time\",\n      \"type\": \"time\"\n    }, {\n      \"name\": \"married\",\n      \"displayName\": \"married\",\n      \"type\": \"select\",\n      \"options\": [\n        {\"id\": \"0\", \"label\": \"YES\"}, {\"id\": \"1\", \"label\": \"NO\"}\n      ]\n    }, {\n      \"name\": \"favorite_singers\",\n      \"displayName\": \"favorite_singers\",\n      \"type\": \"multiselect\",\n      \"options\": [\n        {\"id\": \"0\", \"label\": \"Michel\"}, {\"id\": \"1\", \"label\": \"Jewels\"}, {\"id\": \"2\", \"label\": \"EtonJohn\"}\n      ]\n    }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{HOST}}/v1/dbs",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"dbs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V1.1 - Create Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful create customer db\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"TEST_DB_ID\", jsonData[\"id\"]);",
+									"    for (var index in jsonData[\"fields\"]) {",
+									"        var fieldId = jsonData.fields[index][\"id\"];",
+									"        var fieldName = jsonData.fields[index][\"name\"];",
+									"        var fieldEnv = \"FIELD_\" + fieldName.toUpperCase() + \"_ID\";",
+									"        postman.setEnvironmentVariable(fieldEnv, fieldId);",
+									"    }",
+									"    postman.setNextRequest('Insert Customer Records');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"V11_Test_DB_01\",\n  \"displayName\": \"V11_Test_DB_01\",\n  \"description\": \"V11_Test_DB_01 is created by API v1.1\",\n  \"fields\": [\n    {\n      \"name\": \"id\",\n      \"displayName\": \"customer id\",\n      \"type\": \"text\",\n      \"required\": \"true\",\n      \"unique\": \"true\"\n    },\n      {\n      \"name\": \"name\",\n      \"displayName\": \"Customer name\",\n      \"type\": \"text\",\n      \"required\": \"true\"\n    },{\n      \"name\": \"avatar\",\n      \"displayName\": \"Customer avatar\",\n      \"type\": \"file\",\n      \"allowFileExtensions\": [\"jpg\", \"jpeg\", \"png\"],\n      \"required\": \"false\"\n    },{\n      \"name\": \"bla_text\",\n      \"displayName\": \"test bla text\",\n      \"type\": \"text\",\n      \"required\": \"true\"\n    },\n      {\n      \"name\": \"email\",\n      \"displayName\": \"Customer email\",\n      \"type\": \"email\",\n      \"required\": \"false\"\n    },\n      {\n      \"name\": \"phone\",\n      \"displayName\": \"Customer phone\",\n      \"type\": \"phone\",\n      \"required\": \"false\"\n    },\n      {\n      \"name\": \"workEmail\",\n      \"displayName\": \"Work email\",\n      \"type\": \"email\",\n      \"required\": \"false\"\n    }, {\n      \"name\": \"birth_day\",\n      \"displayName\": \"birthday\",\n      \"type\": \"date\"\n    }, {\n      \"name\": \"last_access\",\n      \"displayName\": \"last_access\",\n      \"type\": \"dateTime\"\n    }, {\n      \"name\": \"most_active_month\",\n      \"displayName\": \"most_active_month\",\n      \"type\": \"monthDay\"\n    }, {\n      \"name\": \"most_active_time\",\n      \"displayName\": \"most_active_time\",\n      \"type\": \"time\"\n    }, {\n      \"name\": \"married\",\n      \"displayName\": \"married\",\n      \"type\": \"select\",\n      \"options\": [\n        {\"id\": \"0\", \"label\": \"YES\"}, {\"id\": \"1\", \"label\": \"NO\"}\n      ]\n    }, {\n      \"name\": \"favorite_singers\",\n      \"displayName\": \"favorite_singers\",\n      \"type\": \"multiselect\",\n      \"options\": [\n        {\"id\": \"0\", \"label\": \"Michel\"}, {\"id\": \"1\", \"label\": \"Jewels\"}, {\"id\": \"2\", \"label\": \"EtonJohn\"}\n      ]\n    }\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/dbs",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"apps",
+								"{{APP_ID}}",
+								"dbs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PATCH: db",
+			"item": [
+				{
+					"name": "V1.0 - Update Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful create customer db\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"TEST_DB_ID\", jsonData[\"id\"]);",
+									"    for (var index in jsonData[\"fields\"]) {",
+									"        var fieldId = jsonData.fields[index][\"id\"];",
+									"        var fieldName = jsonData.fields[index][\"name\"];",
+									"        var fieldEnv = \"FIELD_\" + fieldName.toUpperCase() + \"_ID\";",
+									"        postman.setEnvironmentVariable(fieldEnv, fieldId);",
+									"    }",
+									"    postman.setNextRequest('Insert Customer Records');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"V10_Test_DB_01_BackUp\",\n  \"displayName\": \"V10_Test_DB_01_BackUp\",\n  \"description\": \"V10_Test_DB_01_BackUp is updated by API v1.0\",\n  \"revision\": 1\n}"
+						},
+						"url": {
+							"raw": "http://{{HOST}}/v1/dbs/{{DB_ID}}",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"dbs",
+								"{{DB_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V1.1 - Update Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful create customer db\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"TEST_DB_ID\", jsonData[\"id\"]);",
+									"    for (var index in jsonData[\"fields\"]) {",
+									"        var fieldId = jsonData.fields[index][\"id\"];",
+									"        var fieldName = jsonData.fields[index][\"name\"];",
+									"        var fieldEnv = \"FIELD_\" + fieldName.toUpperCase() + \"_ID\";",
+									"        postman.setEnvironmentVariable(fieldEnv, fieldId);",
+									"    }",
+									"    postman.setNextRequest('Insert Customer Records');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"V11_Test_DB_01_BackUp\",\n  \"displayName\": \"V11_Test_DB_01_BackUp\",\n  \"description\": \"V11_Test_DB_01_BackUp is updated by API v1.1\"\n}"
+						},
+						"url": {
+							"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/dbs/3",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"apps",
+								"{{APP_ID}}",
+								"dbs",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE: db",
+			"item": [
+				{
+					"name": "V1.0 - Delete Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/v1/dbs/{{DB_ID}}",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"dbs",
+								"{{DB_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V1.1 - Delete Db",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "X-Spiral-App-Role",
+								"type": "text",
+								"value": "{{APP_ROLE_NAME}}"
+							},
+							{
+								"key": "X-Spiral-App-Authority",
+								"type": "text",
+								"value": "{{APP_AUTHORITY_NAME}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/dbs/{{DB_ID}}",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"apps",
+								"{{APP_ID}}",
+								"dbs",
+								"{{DB_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create User Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an user\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"USER_ID\", jsonData.id);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "apikey",
+						"value": "{{SPIRALG_SYS_KEY}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"user\",\n  \"lastName\": \"admin\",\n  \"email\": \"user_admin@nal.vn\",\n  \"password\": \"{{USER_PASSWORD}}\",\n  \"birthday\": \"1987-06-30\",\n  \"language\": \"en\",\n  \"subEmail\": \"test_mail@nal.vn\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/sys/v1/users",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"sys",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an account\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"ACCOUNT_ID\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "apikey",
+						"value": "{{SPIRALG_SYS_KEY}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"account-test\",\n  \"displayName\": \"Account Test\",\n  \"adminUser\": \"{{USER_ID}}\",\n  \"type\": \"PBTEST\",\n  \"dbNodeId\": \"{{DB_NODE_ID}}\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/sys/v1/accounts",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"sys",
+						"v1",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"ACCESS_TOKEN\", jsonData.access_token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "apikey",
+						"value": "{{SPIRALG_SYS_KEY}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "hogehoge_{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "fugafuga_{{USER_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{USER_EMAIL}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{USER_PASSWORD}}",
+							"type": "text"
+						},
+						{
+							"key": "account",
+							"value": "{{ACCOUNT_ID}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{HOST}}/oauth2/token",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an account\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"APP_ID\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"app_test\",\n  \"displayName\": \"App Test\",\n  \"description\": \"This is App Test\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/apps",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create CustomerDB_Test_01 for App 01",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create customer db\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"TEST_DB_ID\", jsonData[\"id\"]);",
+							"    for (var index in jsonData[\"fields\"]) {",
+							"        var fieldId = jsonData.fields[index][\"id\"];",
+							"        var fieldName = jsonData.fields[index][\"name\"];",
+							"        var fieldEnv = \"FIELD_\" + fieldName.toUpperCase() + \"_ID\";",
+							"        postman.setEnvironmentVariable(fieldEnv, fieldId);",
+							"    }",
+							"    postman.setNextRequest('Insert Customer Records');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"app\": \"{{APP_ID}}\",\n  \"name\": \"CustomerDB_Test_01\",\n  \"displayName\": \"CustomerDB Test 01\",\n  \"description\": \"This is CustomerDB Test 01\",\n  \"fields\": [\n    {\n      \"name\": \"id\",\n      \"displayName\": \"customer id\",\n      \"type\": \"text\",\n      \"required\": \"true\",\n      \"unique\": \"true\"\n    },\n      {\n      \"name\": \"name\",\n      \"displayName\": \"Customer name\",\n      \"type\": \"text\",\n      \"required\": \"true\"\n    },{\n      \"name\": \"avatar\",\n      \"displayName\": \"Customer avatar\",\n      \"type\": \"file\",\n      \"allowFileExtensions\": [\"jpg\", \"jpeg\", \"png\"],\n      \"required\": \"false\"\n    },{\n      \"name\": \"bla_text\",\n      \"displayName\": \"test bla text\",\n      \"type\": \"text\",\n      \"required\": \"true\"\n    },\n      {\n      \"name\": \"email\",\n      \"displayName\": \"Customer email\",\n      \"type\": \"email\",\n      \"required\": \"true\"\n    },\n      {\n      \"name\": \"phone\",\n      \"displayName\": \"Customer phone\",\n      \"type\": \"phone\",\n      \"required\": \"false\"\n    },\n      {\n      \"name\": \"workEmail\",\n      \"displayName\": \"Work email\",\n      \"type\": \"email\",\n      \"required\": \"false\"\n    }, {\n      \"name\": \"birth_day\",\n      \"displayName\": \"birthday\",\n      \"type\": \"date\"\n    }, {\n      \"name\": \"last_access\",\n      \"displayName\": \"last_access\",\n      \"type\": \"dateTime\"\n    }, {\n      \"name\": \"most_active_month\",\n      \"displayName\": \"most_active_month\",\n      \"type\": \"monthDay\"\n    }, {\n      \"name\": \"most_active_time\",\n      \"displayName\": \"most_active_time\",\n      \"type\": \"time\"\n    }, {\n      \"name\": \"married\",\n      \"displayName\": \"married\",\n      \"type\": \"select\",\n      \"options\": [\n        {\"id\": \"0\", \"label\": \"YES\"}, {\"id\": \"1\", \"label\": \"NO\"}\n      ]\n    }, {\n      \"name\": \"favorite_singers\",\n      \"displayName\": \"favorite_singers\",\n      \"type\": \"multiselect\",\n      \"options\": [\n        {\"id\": \"0\", \"label\": \"Michel\"}, {\"id\": \"1\", \"label\": \"Jewels\"}, {\"id\": \"2\", \"label\": \"EtonJohn\"}\n      ]\n    }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/dbs",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"dbs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Role Test 01 for App Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an account\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"APP_ROLE_ID\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"App_Role_Test_01\",\n  \"displayName\": \"This is App Role Test 01\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/roles",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{APP_ID}}",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Role Test 02 for App Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an account\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"APP_ROLE_ID\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"App_Role_Test_02\",\n  \"displayName\": \"This is App Role Test 02\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/roles",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{APP_ID}}",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Grant App Roles for App Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an account\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    // postman.setEnvironmentVariable(\"APP_ROLE_ID\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"appId\": \"{{APP_ID}}\",\n  \"fullAccess\": true,\n  \"appRoleIds\": [\"{{APP_ROLE_ID}}\"]\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/allUsers/apps",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"allUsers",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update\u001d Role: ACCESS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an account\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    // postman.setEnvironmentVariable(\"APP_ROLE_ID\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fullAccess\": false,\n  \"appRoleIds\": [\"1\"]\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/allUsers/apps/{{APP_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"allUsers",
+						"apps",
+						"{{APP_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update dbPermissions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					},
+					{
+						"key": "x-authenticated-userid",
+						"value": "account={{ACCOUNT_ID}};user={{USER_ID}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"canAccess\": true,\n  \"canInsertRecord\": true,\n  \"canExportRecord\": true,\n  \"canBatchInsertRecord\": true,\n  \"canBatchUpdateRecord\": true,\n  \"canBatchDeleteRecord\": true,\n  \"canEditExpress\": true,\n  \"canDeliveryExpress\": true,\n  \"canTestExpress\": true,\n  \"canViewExpressLog\": true,\n  \"allRecordsPermission\": {\n    \"read\": true,\n    \"update\": true,\n    \"delete\": false\n  },\n  \"recordPermissions\": [\n  \t{\n\t\t\"conditions\" : [{\n\t\t\t\"field\" : \"name\",\n\t\t\t\"operator\" : \"contains\",\n\t\t\t\"value1\": \"TestName\"\n\t\t}],\n\t\t\"read\" :true,\n\t\t\"update\" :true, \n\t\t\"delete\" :false\n\t},\n\t{\n\t\t\"conditions\" : [{\n\t\t\t\"field\" : \"id\",\n\t\t\t\"operator\" : \"gt_and_lt\",\n\t\t\t\"value1\": \"1\",\n\t\t\t\"value2\": \"20\"\n\t\t}],\n\t\t\"read\" :true,\n\t\t\"update\" :true, \n\t\t\"delete\" :false\n\t}\n\t],\n  \"fieldPermissions\": {\n    \"last_access\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"workEmail\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"avatar\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"most_active_time\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"most_active_month\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"birth_day\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"favorite_singers\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"phone\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"name\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"id\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"married\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"bla_text\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    },\n    \"email\": {\n      \"read\": true,\n      \"update\": true,\n      \"insert\": true\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/roles/{{APP_ROLE_ID}}/dbPermissions/{{DB_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{APP_ID}}",
+						"roles",
+						"{{APP_ROLE_ID}}",
+						"dbPermissions",
+						"{{DB_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View dbPermissions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					},
+					{
+						"key": "x-authenticated-userid",
+						"value": "account={{ACCOUNT_ID}};user=5"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST}}/v1/apps/{{APP_ID}}/roles/{{APP_ROLE_ID}}/dbPermissions",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"apps",
+						"{{APP_ID}}",
+						"roles",
+						"{{APP_ROLE_ID}}",
+						"dbPermissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create an user\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"USER_ID\", jsonData.id);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "apikey",
+						"value": "{{SPIRALG_SYS_KEY}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"user\",\n  \"lastName\": \"member\",\n  \"email\": \"user_member@nal.vn\",\n  \"password\": \"{{USER_PASSWORD}}\",\n  \"birthday\": \"1987-06-30\",\n  \"language\": \"en\",\n  \"subEmail\": \"member_mail@nal.vn\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/sys/v1/users",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"sys",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invite Member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create ip groups\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"API_KEYS_ID\", jsonData.id);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN}}"
+					},
+					{
+						"key": "X-Spiral-App-Role",
+						"type": "text",
+						"value": "APP_ROLE_01"
+					},
+					{
+						"key": "X-Spiral-App-Authority",
+						"type": "text",
+						"value": "{{APP_AUTHORITY_NAME}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user_member@nal.vn\",\n\t\"userType\": \"user\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}/v1/invitations",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"v1",
+						"invitations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Member Accepted",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful create ip groups\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"API_KEYS_ID\", jsonData.id);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "apikey",
+						"value": "{{SPIRALG_SYS_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://{{HOST}}/sys/v1/users/{{USER_ID}}/invitations/{{INVITATION_ID}}/join",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"sys",
+						"v1",
+						"users",
+						"{{USER_ID}}",
+						"invitations",
+						"{{INVITATION_ID}}",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable(\"ACCESS_TOKEN\", jsonData.access_token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "apikey",
+						"value": "{{SPIRALG_SYS_KEY}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "hogehoge_2",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "fugafuga_2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "user_member@nal.vn",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{USER_PASSWORD}}",
+							"type": "text"
+						},
+						{
+							"key": "account",
+							"value": "{{ACCOUNT_ID}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{HOST}}/oauth2/token",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
