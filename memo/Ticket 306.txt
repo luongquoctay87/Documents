@@ -1,3 +1,0 @@
-Ticket 306: https://gitlab.nal.vn/nal/projectg/-/issues/306
-API Sample: https://melalu.office-devel/redmine/spiralg/openapi/branches/feature/api-v1.1/#1.1-private-user
-

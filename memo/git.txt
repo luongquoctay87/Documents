@@ -17,3 +17,12 @@ reset comitted not push to repository
 git reset HEAD~
 
 
+-------------------------------------
+FIX CONFLICT
+-------------------------------------
+1. git checkout ticket28739
+2. git rebase feature/2.17.
+3. fix conflict ...
+4. git add feature/{fileName}
+5. git rebase --continue
+6. git push -f origin ticket28739

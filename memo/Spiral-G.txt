@@ -14,11 +14,6 @@ function FindProxyForURL(url, host) {
       ) return "PROXY mail.office.pi-pe.biz:13129" ;
       else return "DIRECT";
 }
-Your connection is not private NET::ERR_CERT_INVALID
---> 
-There's a secret passphrase built into the error page. Just make sure the page is selected (click anywhere on the screen), and just type thisisunsafe
-
-
 
 
 
