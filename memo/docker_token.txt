@@ -1,0 +1,8 @@
+Copy Access Token
+When logging in from your Docker CLI client, use this token as a password. Learn more
+ACCESS TOKEN DESCRIPTION
+Docker_Token_for_TayLQ
+To use the access token from your Docker CLI client:
+1. Run docker login --username luongquoctay87
+2. At the password prompt, enter the personal access token.
+85b243af-3766-4bc6-86be-c1092cc831f9
