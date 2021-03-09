@@ -43,3 +43,18 @@ Xoa tat ca
 docker rmi $(docker images -q) -f
 
 
+_________________________________________________
+push docker image to Hub
+_________________________________________________
+1 . Run docker login --username luongquoctay87
+2. At the password prompt, enter the personal access token: 85b243af-3766-4bc6-86be-c1092cc831f9
+3. $ docker images
+    api-gateway                    latest                                     f877d3f9b1fc   4 days ago      176MB
+    file-service                    latest                                     04ed0545554a   4 days ago      391MB
+
+4. $ docker tag api-gateway:latest luongquoctay87/spiral-g:api-gateway
+5. $ docker push luongquoctay87/spiral-g:api-gateway
+** Remove tag: docker rmi luongquoctay87/spiral-g:api-gateway
+
+
+
