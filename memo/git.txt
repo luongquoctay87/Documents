@@ -26,3 +26,6 @@ FIX CONFLICT
 4. git add feature/{fileName}
 5. git rebase --continue
 6. git push -f origin ticket28739
+
+push len gitlab
+git push gitlab-g ticket29377
