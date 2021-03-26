@@ -1,0 +1,21 @@
+1. PeriodicService: [batch process schedule cron] scheduling
+    -> java/com/pipedbits/spiralg/dbnodeservice/services/internal/PeriodicService.java
+        public void sendMessageToProcessAllAccount() throws InterruptedException {
+            log.info("[batch process schedule cron] scheduling");
+            this.emailLogExportSchedulingProducer.send();
+            this.exportMessagePublisher.publishMessage();
+            this.recordCountPublisher.send();
+            this.batchWriteScsProducer.publish();
+            log.info("finished [batch process schedule cron] scheduling");
+        }
+
+        ==> moi lan cron job chay thi kafka se in ra log config cho moi function tuong ung
+            ->
+
+            public void publishMessage()
+            {
+                ...
+                log.info("send kafka message to recordExportSchedulingTrigger to proceed all node");
+                ...
+            }
+

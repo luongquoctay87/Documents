@@ -1,0 +1,41 @@
+service/db-node-service/src/main/java/com/pipedbits/spiralg/dbnodeservice/models/export/ExportResponse.java
+    -> com/pipedbits/spiralg/dbnodeservice/services/internal/DefaultRecordService.java
+        -> GET /user/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports
+        -> GET /user/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports/{recordExportId:\d+}
+        -> POST /user/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports/{recordExportId:\d+}/cancel
+
+        -> /sys/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports
+        -> /sys/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports/{recordExportId:\d+}
+        -> /sys/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports/{recordExportId:\d+}/cancel
+
+
+service/lib/db/src/main/java/com/pipedbits/spiralg/db/formatter/MultiselectRecordValueFormatter.java
+    -> RecordExportListener > onMessage
+
+
+
+service/lib/db/src/main/java/com/pipedbits/spiralg/db/models/field/MultiselectTypeField.java
+    -> /user/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports
+    -> /sys/dbs/{dbId:\d+|@[a-zA-Z0-9_]+\.[a-zA-Z0-9_]+}/records/exports
+
+
+# service/lib/db/src/test/java/com/pipedbits/spiralg/db/formatter/MultiselectRecordValueFormatterTest.java
+
+service/lib/email/src/main/java/com/pipedbits/spiralg/email/utils/replacer/VariableReplacer.java
+service/mail-service/src/main/java/com/pipedbits/spiralg/mailservice/services/impl/ActionServiceImpl.java : 1318 ~ 1323
+    -> POST: /user/actions/{actionId:\d+}/test                      (com/pipedbits/spiralg/mailservice/api/controllers/user/ActionController.java)
+    -> POST: /user/appFixedMailActions/{actionId:\d+}/test          (com/pipedbits/spiralg/mailservice/api/controllers/user/MailActionController.java)
+
+
+
+service/mail-service/src/main/java/com/pipedbits/spiralg/mailservice/services/impl/ContentReplacementServiceImpl.java
+    -> POST, PATCH: 
+        v1.1: /user/apps/{appId:\d+}/dbs/{dbId:\d+}/express/email
+        v1.0: /user/express/email
+        
+    -> PATCH: /user/actions/{actionId:\d+}
+
+
+service/mail-service/src/main/java/com/pipedbits/spiralg/mailservice/services/impl/ExpressEmailServiceImpl.java
+service/mail-service/src/main/java/com/pipedbits/spiralg/mailservice/services/impl/MailActionServiceImpl.java
+service/mail-service/src/test/java/com/pipedbits/spiralg/mailservice/services/ContentReplacementServiceCreateTest.java

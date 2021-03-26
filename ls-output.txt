@@ -1,0 +1,18 @@
+total 704
+-rw-r--r--  1 luongquoctay  staff   39801 Mar  9 15:36 API- DB.postman_collection.json
+-rw-r--r--  1 luongquoctay  staff  212701 Mar  9 15:36 DB_EXPORT.postman_collection.json
+-rw-r--r--  1 luongquoctay  staff    1721 Mar  8 12:06 Dockerfile
+-rw-r--r--  1 luongquoctay  staff   19044 Mar  9 15:36 Init SpiralG.postman_collection.json
+-rw-r--r--  1 luongquoctay  staff    5717 Mar  8 12:06 Lafu.txt
+-rw-r--r--  1 luongquoctay  staff    2468 Mar  8 12:06 SCP.txt
+-rw-r--r--  1 luongquoctay  staff     935 Mar  9 15:36 Shell Script.md
+-rwxr-xr-x  1 luongquoctay  staff    1782 Mar  8 12:06 Spiral-G.txt
+-rw-r--r--  1 luongquoctay  staff    7069 Mar 10 11:43 custom_nginx.template
+-rw-r--r--  1 luongquoctay  staff     666 Mar  8 12:06 deploy.txt
+-rw-r--r--  1 luongquoctay  staff   17297 Mar 12 15:30 docker-compose-origin.yml
+-rwxr-xr-x  1 luongquoctay  staff    1714 Mar  9 15:36 docker.txt
+-rw-r--r--  1 luongquoctay  staff     348 Mar  9 15:36 docker_token.txt
+-rwxr-xr-x  1 luongquoctay  staff     703 Mar 11 15:59 git.txt
+-rw-r--r--  1 luongquoctay  staff    1200 Mar  9 15:36 hosts
+-rwxr-xr-x  1 luongquoctay  staff    4954 Mar  8 12:06 memoTask.txt
+-rw-r--r--  1 luongquoctay  staff    2842 Mar  8 12:06 settings.ts

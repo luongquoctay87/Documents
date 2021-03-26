@@ -29,3 +29,6 @@ FIX CONFLICT
 
 push len gitlab
 git push gitlab-g ticket29377
+
+// tao repository
+git remote add gitlab git@gitlab.nal.vn:nal/projectg.git
